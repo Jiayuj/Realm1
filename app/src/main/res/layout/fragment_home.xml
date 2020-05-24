@@ -9,23 +9,23 @@
     android:id="@+id/homefff">
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <Button
         android:id="@+id/addNewRestaurante"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add_black_24dp"
+        android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/removeRestaurant"
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <Button
         android:id="@+id/removeRestaurant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_remove_black_24dp"
+        android:text="REMOVE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/modificar"
         app:layout_constraintStart_toEndOf="@+id/addNewRestaurante" />

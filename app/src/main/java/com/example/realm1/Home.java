@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.realm1.model.Migration;
+
 import com.example.realm1.model.Restaurante;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 
@@ -56,7 +61,10 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mRealm =Realm.getDefaultInstance();
+        mRealm = Realm.getDefaultInstance();
+
+        showStatus("Restaurante");
+        showStatus(mRealm);
 
         view.findViewById(R.id.addNewRestaurante).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +106,7 @@ public class Home extends Fragment {
         elementosAdapter = new ElementosAdapter(r);
         elementosRecyclerView.setAdapter(elementosAdapter);
 
+
     }
     //cercar resultat
     private void cercarRest(View view) {
@@ -135,6 +144,23 @@ public class Home extends Fragment {
         });
         r = queryAllRest();
         elementosAdapter.establecerListaElementos(r);
+    }
+
+    private String realmString(Realm realm) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Restaurante restaurante : realm.where(Restaurante.class).findAll()) {
+            stringBuilder.append(restaurante.toString()).append("\n");
+        }
+
+        return (stringBuilder.length() == 0) ? "<data was deleted>" : stringBuilder.toString();
+    }
+
+    private void showStatus(Realm realm) {
+        showStatus(realmString(realm));
+    }
+
+    private void showStatus(String txt) {
+        Log.i("Restaurante", txt);
     }
 
     private List<Restaurante> queryAllRest() {

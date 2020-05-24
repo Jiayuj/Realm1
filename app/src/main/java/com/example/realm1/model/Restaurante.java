@@ -1,5 +1,6 @@
 package com.example.realm1.model;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -9,6 +10,7 @@ public class Restaurante extends RealmObject {
     private String id;
     private String nombre;
     private String descripcion;
+    RealmList<Product> products;
 
     public String getId() {
         return id;
@@ -27,5 +29,11 @@ public class Restaurante extends RealmObject {
     }
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+    public RealmList<Product> getProtuctos() {
+        return products;
+    }
+    public void setProtuctos(RealmList<Product> products) {
+        this.products = products;
     }
 }
